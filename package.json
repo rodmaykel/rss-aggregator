@@ -1,0 +1,13 @@
+{
+  "name": "rss-aggregator",
+  "version": "0.0.1",
+  "private": false,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "mongoq": "*",
+    "feedparser": "*",
+    "request": "*"
+  }
+}
