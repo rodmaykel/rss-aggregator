@@ -3,6 +3,8 @@ var DBconfig = require('./lib/config').db;
 var DB = require('./lib/db');
 var FeedParser = require('feedparser');
 var request = require('request');
+var urlify = require('./lib/urlify');
+
 
 var db = new DB(DBconfig.url);
 
@@ -42,12 +44,15 @@ function processSource(source, cb) {
       , item;
     while (item = stream.read()) {
       var query = {link: item.link};
+      source.source_id = urlify(source.name);
       var record = {
+        item_id: urlify(item.title),
         link: item.link,
         title: item.title,
         summary: item.summary,
         source: source,
-        date: item.date
+        date: item.date,
+        created_at: new Date()
       }
       db.upsert(query, record, function(error, result){
         console.log(result);
