@@ -46,6 +46,7 @@ function processSource(source, cb) {
       var query = {link: item.link};
       source.source_id = urlify(source.name);
       var record = {
+        "$set": {
         item_id: urlify(item.title),
         link: item.link,
         title: item.title,
@@ -53,6 +54,7 @@ function processSource(source, cb) {
         source: source,
         date: item.date,
         created_at: new Date()
+        }
       }
       db.upsert(query, record, function(error, result){
         console.log(result);
